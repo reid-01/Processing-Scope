@@ -37,10 +37,10 @@ Make sure the following files are located in the Spectrum_Analyzer_Edit sketch f
         Oscilloscope.pde
         Spectrum.pde
         Spectrum_Analyzer_Edit.pde
-	      TraceShade.pde
+	TraceShade.pde
 
 
-Any audio files to be used for input must be placed in the sketch folder as well. The name of the audio file must be written into the following line, under the setup() class in Spectrum_Analyzer_edit.pde
+Any audio files to be used for input must be placed in the sketch folder. The name of the audio file must be written into the following line, under the setup() class in Spectrum_Analyzer_Edit.pde
 
 
 	track = new SoundFile(this, "anything");
