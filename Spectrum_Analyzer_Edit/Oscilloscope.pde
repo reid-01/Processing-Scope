@@ -23,6 +23,10 @@ class Oscilloscope {
   float[] avgVector = new float[bands];
   float columnAvg;
 
+  color stdFill = color(0, 255, 255);
+  color maxFill = color(255, 215, 0);
+  color minFill = color(255, 165, 0);
+
   boolean yConstrain = true;
   boolean maxedOut = false;
 
@@ -105,19 +109,53 @@ class Oscilloscope {
         y2Std = constr[5];
       }
 
-      stroke(0, 255, 255);
+      //draw order: max, std, min
+
+      if (lockMax) {
+        stroke(maxFill);
+        line(xOffsetGraph+i, graphHeight+yOffsetGraph-y1Max,
+          xOffsetGraph+i+1, graphHeight+yOffsetGraph-y2Max);
+        if (showShadingUnderTrace) {
+          TraceShade shade = new TraceShade(graphHeight+yOffsetGraph-y1Max,
+            graphHeight+yOffsetGraph-y2Max,
+            yOffsetGraph+graphHeight-y1Std, yOffsetGraph+graphHeight-y2Std,
+            i+xOffsetGraph, i+xOffsetGraph+1, maxFill);
+          shade.display();
+        }
+      }
+
+      stroke(stdFill);
       line(xOffsetGraph+i, graphHeight+yOffsetGraph-y1Std,
         xOffsetGraph+i+1, graphHeight+yOffsetGraph-y2Std);
+      if (showShadingUnderTrace) {
+        if (lockMin) {
+          TraceShade shade = new TraceShade(graphHeight+yOffsetGraph-y1Std,
+            graphHeight+yOffsetGraph-y2Std,
+            yOffsetGraph+graphHeight-y1Min,
+            yOffsetGraph+graphHeight-y2Min,
+            i+xOffsetGraph, i+xOffsetGraph+1, stdFill);
+          shade.display();
+        } else {
+          TraceShade shade = new TraceShade(graphHeight+yOffsetGraph-y1Std,
+            graphHeight+yOffsetGraph-y2Std,
+            yOffsetGraph+graphHeight,
+            yOffsetGraph+graphHeight,
+            i+xOffsetGraph, i+xOffsetGraph+1, stdFill);
+          shade.display();
+        }
+      }
 
       if (lockMin) {
         stroke(255, 165, 0);
         line(xOffsetGraph+i, graphHeight+yOffsetGraph-y1Min,
           xOffsetGraph+i+1, graphHeight+yOffsetGraph-y2Min);
-      }
-      if (lockMax) {
-        stroke(255, 215, 0);
-        line(xOffsetGraph+i, graphHeight+yOffsetGraph-y1Max,
-          xOffsetGraph+i+1, graphHeight+yOffsetGraph-y2Max);
+        if (showShadingUnderTrace) {
+          TraceShade shade = new TraceShade(graphHeight+yOffsetGraph-y1Min,
+            graphHeight+yOffsetGraph-y2Min,
+            yOffsetGraph+graphHeight, yOffsetGraph+graphHeight,
+            i+xOffsetGraph, i+xOffsetGraph+1, minFill);
+          shade.display();
+        }
       }
     }
   }

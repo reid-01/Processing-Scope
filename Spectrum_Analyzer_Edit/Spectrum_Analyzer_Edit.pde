@@ -1,6 +1,8 @@
 import processing.sound.*;
 import controlP5.*;
 
+// TODO time domain plot, trigger cutoff, JSON files, BSD2 license
+
 //Class declarations
 FFT fft;
 ControlP5 cp5;
@@ -20,9 +22,9 @@ float[] spectrum = new float[bands];
 boolean lockMax = false;
 boolean lockMin = false;
 boolean showClipMarker = false;
+boolean showShadingUnderTrace = true;
 
 void setup() {
-  //Spectrum and Oscilloscope windows must be bands wide - height can be anything.
   size(1280, 720);
   background(255);
 
@@ -36,7 +38,7 @@ void setup() {
 
   //Open sound file and plug into FFT.
   //Replace title string with any mp3 or wav in the same directory as the pde files.
-  track = new SoundFile(this, "anything.mp3");
+  track = new SoundFile(this, "anything");
   track.loop();
   fft.input(track);
 
