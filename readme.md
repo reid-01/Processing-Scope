@@ -50,3 +50,5 @@ Replace ‘anything’ with the name of the audio file to be used. Make sure the
 
 
 Run the program through the Processing IDE.
+
+Processing downloads and documentation are availabe here: https://processing.org/
