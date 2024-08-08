@@ -1,17 +1,17 @@
-class Oscilloscope {
+class FreqDomainDisplay {
   //Static variables for window size (Includes graph, axes, and labels)
   int xOffsetWindow = 0;
-  int yOffsetWindow = 0;
+  int yOffsetWindow = 40;
   int windowWidth = 640;
-  int windowHeight = 480;
+  int windowHeight = 240;
   int xGridSpacing = 64;
   int yGridSpacing = 60;
 
   //Static variables for graph size
   int graphWidth = bands;
-  int graphHeight = 360;
-  int xOffsetGraph = (windowWidth-graphWidth)/2;
-  int yOffsetGraph = (windowHeight-graphHeight)/2;
+  int graphHeight = 180;
+  int xOffsetGraph = xOffsetWindow+(windowWidth-graphWidth)/2;
+  int yOffsetGraph = yOffsetWindow+(windowHeight-graphHeight)/2;
 
   //maxVector holds highest peak value at any given band
   //minVector holds lowest peak value at any given band
@@ -84,14 +84,14 @@ class Oscilloscope {
   void displayBands() {
     for (int i = 0; i<bands-1; i++) {
       float y1Std, y2Std, y1Max, y2Max, y1Min, y2Min;
-      y1Max = graphHeight*maxVector[i]*6;
-      y2Max = graphHeight*maxVector[i+1]*6;
+      y1Max = graphHeight*maxVector[i]*12;
+      y2Max = graphHeight*maxVector[i+1]*12;
 
-      y1Min = graphHeight*minVector[i]*6;
-      y2Min = graphHeight*minVector[i+1]*6;
+      y1Min = graphHeight*minVector[i]*12;
+      y2Min = graphHeight*minVector[i+1]*12;
 
-      y1Std = graphHeight*avgVector[i]*6;
-      y2Std = graphHeight*avgVector[i+1]*6;
+      y1Std = graphHeight*avgVector[i]*12;
+      y2Std = graphHeight*avgVector[i+1]*12;
 
       float[] constr = {y1Max, y2Max, y1Min, y2Min, y1Std, y2Std};
       if (yConstrain) {

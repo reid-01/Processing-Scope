@@ -1,7 +1,7 @@
-class Spectrum {
+class Spectrograph {
   //Static variables for window size (Includes graph, axes, and labels)
-  int xOffsetWindow = width/2;
-  int yOffsetWindow = 0;
+  int xOffsetWindow = 640;
+  int yOffsetWindow = 40;
   int windowWidth = 640;
   int windowHeight = 480;
 
